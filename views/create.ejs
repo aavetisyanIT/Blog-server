@@ -3,9 +3,30 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>My Blog</title>
+		<title>My Blogs</title>
 	</head>
 	<body>
-		<h1>Create</h1>
+		<nav>
+			<div class="site-title">
+				<a href="/"><h1>My Blogs</h1></a>
+				<p>My test blog</p>
+			</div>
+			<ul>
+				<li><a href="/">Blogs</a></li>
+				<li><a href="/about">About</a></li>
+				<li><a href="/blogs/create">New Blog</a></li>
+			</ul>
+		</nav>
+		<div class="create-blog content">
+			<form>
+				<label for="title">Blog title</label>
+				<input type="text" id="title" required />
+				<label for="snippet">Blog snippet:</label>
+				<input type="text" id="snippet" required />
+				<label for="body">Blog body:</label>
+				<textarea id="body" required></textarea>
+				<button>Submit</button>
+			</form>
+		</div>
 	</body>
 </html>
