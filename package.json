@@ -18,6 +18,8 @@
   "homepage": "https://github.com/aavetisyanIT/Blog-server#readme",
   "dependencies": {
     "ejs": "^3.1.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.10",
+    "morgan": "^1.10.0"
   }
 }
