@@ -29,7 +29,7 @@ app.use(morgan("dev"));
 //routes
 app.get("/", (req, res) => {
   const blogs = [];
-  res.redirect("/about");
+  res.redirect("/blogs");
 });
 
 app.get("/about", (req, res) => {
@@ -55,6 +55,15 @@ app.post("/blogs", (req, res) => {
     .save()
     .then((result) => {
       res.redirect("/blogs");
+    })
+    .catch((err) => console.log(err));
+});
+
+app.get("/blogs/:id", (req, res) => {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then((result) => {
+      res.render("details", { title: "Blog details", blog: result });
     })
     .catch((err) => console.log(err));
 });
