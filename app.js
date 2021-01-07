@@ -1,55 +1,52 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const morgan = require('morgan');
-const mongoose = require('mongoose');
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+const Blog = require("./models/blog");
 
 //connect to mongodb
 const dbURI =
-	'mongodb+srv://admin:database1234@myblogs.tptfc.mongodb.net/<myBlogs>?retryWrites=true&w=majority';
+  "mongodb+srv://admin:database1234@myblogs.tptfc.mongodb.net/<myBlogs>?retryWrites=true&w=majority";
 mongoose
-	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then((result) => {
-		//first connect to DB
-		console.log('connected to db');
-		//then listen for requests
-		app.listen(3000, () => {
-			console.log('Server is running on port 3000');
-		});
-	})
-	.catch((err) => console.log(err));
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => {
+    //first connect to DB
+    console.log("connected to db");
+    //then listen for requests
+    app.listen(3000, () => {
+      console.log("Server is running on port 3000");
+    });
+  })
+  .catch((err) => console.log(err));
 
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 //middleware and static files
-app.use('/public', express.static('public'));
-app.use(morgan('dev'));
+app.use("/public", express.static("public"));
+app.use(morgan("dev"));
 
-app.get('/', (req, res) => {
-	const blogs = [
-		{
-			title: 'Yoshi finds eggs',
-			snippet: 'Lorem ipsum dolor sit amet consectetur',
-		},
-		{
-			title: 'Mario finds stars',
-			snippet: 'Lorem ipsum dolor sit amet consectetur',
-		},
-		{
-			title: 'How to defeat bowser',
-			snippet: 'Lorem ipsum dolor sit amet consectetur',
-		},
-	];
-	res.render('index', { title: 'Home', blogs });
+//routes
+app.get("/", (req, res) => {
+  const blogs = [];
+  res.redirect("/about");
 });
 
-app.get('/about', (req, res) => {
-	res.render('about', { title: 'About' });
+app.get("/about", (req, res) => {
+  res.render("about", { title: "About" });
 });
-app.get('/blogs/create', (req, res) => {
-	res.render('create', { title: 'Create new Blog' });
+
+//blog routes
+app.get("/blogs", (req, res) => {
+  Blog.find().then((result) => {
+    res.render("index", { title: "All blogs", blogs: result });
+  });
+});
+
+app.get("/blogs/create", (req, res) => {
+  res.render("create", { title: "Create new Blog" });
 });
 
 //404 page
 app.use((req, res) => {
-	res.status(404).render('404', { title: '404' });
+  res.status(404).render("404", { title: "404" });
 });
