@@ -19,5 +19,5 @@ const blogSchema = new Schema(
 	{ timestamps: true },
 );
 
-const MyBlog = mongoose.model('myBlog', blogSchema);
+const MyBlog = mongoose.model('Blog', blogSchema);
 module.exports = MyBlog;
