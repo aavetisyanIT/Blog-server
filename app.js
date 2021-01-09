@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
 const MyBlog = require('./models/blog');
+const { render } = require('ejs');
 
 //connect to mongodb
 const dbURI =
@@ -56,6 +57,16 @@ app.post('/blogs', (req, res) => {
 	blog
 		.save()
 		.then((result) => res.redirect('/blogs'))
+		.catch((err) => console.log(err));
+});
+
+//single blog page
+app.get('/blogs/:id', (req, res) => {
+	const id = req.params.id;
+	Blog.findById(id)
+		.then((result) => {
+			res.render('details', { title: 'Blog Details', blog: result });
+		})
 		.catch((err) => console.log(err));
 });
 
