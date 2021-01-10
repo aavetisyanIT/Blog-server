@@ -15,7 +15,7 @@ This is a simple project to create a blog website. Idea behind it is to practice
 
 ## Authors
 
--  **Artur Avetisyan** - _Initial work_ - [PurpleBooth](https://github.com/aavetisyanIT/Blogs-server)
+-  **Artur Avetisyan** - _Initial work_ - [Code Source](https://github.com/aavetisyanIT/Blogs-server)
 
 ## Acknowledgments
 
